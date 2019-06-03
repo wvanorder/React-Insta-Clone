@@ -6,7 +6,7 @@ const PostContainer = props => {
     return(
         <div>
             {props.posts.map(postOnList => (
-                        <PostCard post={postOnList} /> 
+                        <PostCard key={Math.random} post={postOnList} /> 
                     ))}
         </div>
     )

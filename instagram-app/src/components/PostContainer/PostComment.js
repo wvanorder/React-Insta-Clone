@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Post.scss';
+
 
 const PostComment = props => {
         return(
@@ -13,5 +15,15 @@ const PostComment = props => {
             </div> 
         )
 };
+
+PostComment.propTypes = {
+    comments: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            username: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired
+        })
+    )
+}
 
 export default PostComment;

@@ -17,7 +17,6 @@ class App extends React.Component {
  render() {
    return (
     <div className="App">
-    <Button color="primary">primary</Button>{' '}
     <SearchBar />
     <PostContainer posts={this.state.data} />
   </div>
