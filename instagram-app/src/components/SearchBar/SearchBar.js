@@ -10,7 +10,7 @@ const SearchBar = props => {
         <div className="searchBar">
             <img className='logo' src='https://online-harvest.com/en/wp-content/uploads/2018/09/if_38-instagram_1161953-1-e1538728533467.png'/>
             <img className='text-logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1280px-Instagram_logo.svg.png' />
-            <input className='search' placeholder='search'/>
+            <input className='search' placeholder='search' name='search' value={props.searchTerm} onChange={props.inputChange}/>
             <div className='icons'>
                 <FontAwesomeIcon className='icon' icon={faCompass} />
                 <FontAwesomeIcon className='icon' icon={faHeart} />
