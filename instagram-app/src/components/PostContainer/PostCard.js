@@ -7,37 +7,25 @@ import {faHeart, faComment} from '@fortawesome/free-regular-svg-icons';
 
 class PostCard extends React.Component {
     state = {
-        comments: this.props.post.comments,
-        newComment: '',
-        error: null,
         likes: this.props.post.likes,
     }
 
-    addComment = event => {
-        if(this.state.newComment === '') {
-            return this.setState({
-                error: 'You must type something to leave a comment!',
-            });
-        }
-        event.preventDefault();
-        const newComment = {
-            id: this.state.comments.length + 1,
-            username: 'anonymous',
-            text: this.state.newComment,
-            
-        };
-        this.setState(state => ({
-            comments: [...state.comments, newComment],
-            newComment: '',
-            error: null,
-        }))
-    } 
+    componentDidUpdate(prevProps, prevState) {
+        const posts = JSON.parse(localStorage.getItem('data'));
+        const newPosts = posts.map(post => {
+            if(post.id === this.props.post.id) {
+                post.likes = this.state.likes
+            }
+            return post;
 
-    commentInput = event => {
-        this.setState({
-            [event.target.name]: event.target.value,
         });
-    };
+        localStorage.setItem('data', JSON.stringify(newPosts));
+
+    }
+
+
+
+  
 
     addLike = event => {
         const newLikes = this.state.likes + 1;
@@ -63,11 +51,13 @@ class PostCard extends React.Component {
         
                 <h5>{this.state.likes} Likes</h5>
                
-                <PostComment key={(Date.now() + Math.Random)} comments={this.state.comments} />
+                <PostComment key={this.props.post.id} comments={this.props.post.comments} />
                 <div className='add-comment'>
-                    <form onSubmit={this.addComment}>
-                        <input placeholder='add comment here' value={this.state.newComment} onChange={this.commentInput} name='newComment'/>
-                        <button onClick={this.addComment}>...</button>
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        this.props.addComment(this.props.post.id)}}>
+                        <input placeholder='add comment here' value={this.props.newComment} onChange={e => this.props.commentInput(e)} name='newComment'/>
+                        <button onClick={() => this.props.addComment(this.props.post.id)}>...</button>
                     </form>
                 </div>
                 

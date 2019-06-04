@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
-import { Button } from 'reactstrap';
 import dummyData from './dummy-data';
 import PostContainer from './components/PostContainer/PostContainer';
 
@@ -12,15 +11,31 @@ class App extends React.Component {
     this.state = {
       data: [],
       search: '',
+      newComment: '',
+      error: null,
     };
   }
 
+  
   componentDidMount() {
-    setTimeout( () =>
+    if(!localStorage.getItem('data')){
+      setTimeout( () =>
       this.setState({
         data: dummyData
       }), 2000)
+    } else{
+      this.setState({
+        data: JSON.parse(localStorage.getItem('data')),
+        isLoading: false
+      })
+    }
+    
   }
+  componentDidUpdate(prevProps, prevState) {
+    localStorage.setItem('data', JSON.stringify(this.state.data));
+    localStorage.setItem('dataDate', Date.now());
+  }
+
 
 
   searchPosts = (value = this.state.search) => {
@@ -44,14 +59,54 @@ class App extends React.Component {
 };
 
 
+addComment = (id) => {
+  if(this.state.newComment === '') {
+      return this.setState({
+          error: 'You must type something to leave a comment!',
+      });
+  }
+  const newComment = {
+      username: 'anonymous',
+      text: this.state.newComment,
+      
+  };
+  const posts = JSON.parse(localStorage.getItem('data')).map(post => {
+    if(post.id === id) { 
+      newComment.id = post.comments.length + 1;
+      post.comments = [...post.comments, newComment]
+    } 
+    return post;
+  })
+  this.setState({
+      data: [...posts],
+      newComment: '',
+      error: null,
+  })
+} 
+
+commentInput = event => {
+  this.setState({
+      newComment: event.target.value,
+  });
+};
+
+
+
     
  render() {
    return (
     <div className="App">
     <SearchBar searchTerm={this.state.search} inputChange={this.searchInput}/>
-    <PostContainer posts={this.state.data.filter(post => {
+    <PostContainer 
+    posts={this.state.data.filter(post => {
       return post.username.toLowerCase().includes(this.state.search.toLowerCase())
-    })} searchTerm={this.state.search} />
+    })} 
+    searchTerm={this.state.search} 
+    newComment={this.state.newComment}
+    error={this.state.error}
+    addComment={this.addComment}
+    commentInput={this.commentInput}
+    />
   </div>
    )
      
