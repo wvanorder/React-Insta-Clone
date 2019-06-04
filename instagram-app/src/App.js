@@ -32,8 +32,10 @@ class App extends React.Component {
     
   }
   componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem('data', JSON.stringify(this.state.data));
-    localStorage.setItem('dataDate', Date.now());
+    if(prevState.data !== this.state.data) {
+      localStorage.setItem('data', JSON.stringify(this.state.data));
+      localStorage.setItem('dataDate', Date.now());
+    }
   }
 
 
