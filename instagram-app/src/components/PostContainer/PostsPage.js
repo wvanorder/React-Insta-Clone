@@ -13,7 +13,7 @@ class PostsPage extends React.Component {
           search: '',
           newComment: '',
           error: null,
-          username: '',
+          username: localStorage.getItem('username'),
          
         };
       }
@@ -24,7 +24,6 @@ class PostsPage extends React.Component {
           setTimeout( () =>
           this.setState({
             data: dummyData,
-            username: localStorage.getItem('username')
           }), 2000)
         } else{
           this.setState({
