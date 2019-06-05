@@ -39,7 +39,7 @@ class NormalLoginForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
+      <div className='log-in-page'>
         <h1 className='log-in-title'>Welcome to Instakilo</h1>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
