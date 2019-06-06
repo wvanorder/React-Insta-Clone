@@ -50,12 +50,18 @@ class NormalLoginForm extends React.Component {
     super();
     this.state = {
       users: dummyUsers,
-    };
+      usernames: [],
+      };
   }
 
   componentDidMount() {
     console.log('login working');
+    if(localStorage.getItem('users') !== null) {
+      this.setState({
+      users: JSON.parse(localStorage.getItem('users')),
+    })
   }
+}
 
   componentDidUpdate(prevProps, prevState) {
     if(prevState.data !== this.state.data) {
@@ -72,8 +78,9 @@ class NormalLoginForm extends React.Component {
           console.log('Received values of form: ', values);
           localStorage.setItem('username', values.username);
           localStorage.setItem('password', values.password);
+          localStorage.setItem('users', JSON.stringify(this.state.users));
           document.location.reload();
-        }
+        } 
       }
         
      
@@ -81,10 +88,39 @@ class NormalLoginForm extends React.Component {
         alert('Please fill out both inputs!');
         
       } 
-        
-      
     });
   };
+
+  handleSubmitSignUp = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) { for(let i = 0;i < this.state.users.length; i ++) {
+        if(values.username !== this.state.users[i].username && values.password !== this.state.users[i].password) {
+          console.log('Received values of form: ', values);
+          const newUser = {
+            username: values.username,
+            password: values.password,
+          };
+          const newArr= [...this.state.users, newUser];
+          localStorage.setItem('users', JSON.stringify(newArr));
+          this.setState({
+            users: JSON.parse(localStorage.getItem('users')),
+          });
+
+          console.log(this.state.users);
+          //document.location.reload();
+        } 
+      }
+        
+     
+      } else if(values.username === undefined || values.password === undefined) {
+        alert('Please fill out both inputs!');
+        
+      } 
+    });
+  };
+
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -117,6 +153,9 @@ class NormalLoginForm extends React.Component {
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
+            </Button>
+            <Button type="primary" htmlType="submit" className="login-form-button" onClick={this.handleSubmitSignUp}>
+              Sign Up
             </Button>
           </Form.Item>
         </Form>
