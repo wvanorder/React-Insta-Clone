@@ -23,6 +23,7 @@ height: 40px;
 width: 30%;
 margin: 0 10%;
 align-self: center;
+min-width: 200px;
 `;
 
 const NewButton = styled(Button)`

@@ -20,12 +20,15 @@ const Title = styled.h1`
   font-size: 100px;
   text-align: center;
   color: #307380;
-  width: 500px;
+  width: 700px;
   margin: 100px auto 0px auto;
   text-align: center;
   animation: ${dissolveIn};
     animation-duration: 2s;
     animation-fill-mode: both;
+    @media screen and (max-width: 800px){
+      width: 450px;
+  }
     
 `;
 

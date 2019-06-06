@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 const PostCards = styled.div`
     width: 642px;
+    max-width: 90%;
     height: auto;
     border: 4px solid white;
     margin: 0 auto;
@@ -17,10 +18,20 @@ const PostCards = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     background-color: white;
+    
     .picture{
         width: 634px;
+        max-width: 99.9%;
         margin-top: 10px;
-        margin-left: -5px
+        @media screen and (max-width: 650px){
+        height: 550px;
+        }
+        @media screen and (max-width: 550px){
+            height: 480px;
+            }
+            @media screen and (max-width: 550px){
+                height: 430px;
+                }
     }
     .user{
         width: 50px;
