@@ -107,8 +107,10 @@ class NormalLoginForm extends React.Component {
             users: JSON.parse(localStorage.getItem('users')),
           });
 
+
+
           console.log(this.state.users);
-          //document.location.reload();
+          document.location.reload();
         } 
       }
         
