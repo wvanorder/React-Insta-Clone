@@ -2,45 +2,6 @@ import React from 'react';
 import './Login.scss';
 import dummyUsers from '../../../src/dummy-users';
 import { Form, Icon, Input, Button } from 'antd';
-import styled from 'styled-components';
-import { keyframes } from 'styled-components';
-
-
-const dissolveIn = keyframes`
- {
-  from {
-      opacity: 0; 
-  }
-  to {
-      opacity: 1;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 100px;
-  text-align: center;
-  color: #307380;
-  width: 500px;
-  margin: 100px auto 0px auto;
-  text-align: center;
-  animation: ${dissolveIn};
-    animation-duration: 2s;
-    animation-fill-mode: both;
-    
-`;
-
-const SubTitle = styled(Title)`
-font-size: 32px;
-  margin: 0px auto;
-  animation-delay: 2s;
-    animation-duration: 0.5s;
-`;
-
-const LogInPage = styled.div`
-width:100%;
-    background: rgb(236,255,231);
-background: linear-gradient(144deg, rgba(236,255,231,1) 6%, rgba(174,219,194,1) 76%);
-`
 
 class NormalLoginForm extends React.Component {
   constructor() {
@@ -53,14 +14,6 @@ class NormalLoginForm extends React.Component {
   componentDidMount() {
     console.log('login working');
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(prevState.data !== this.state.data) {
-      localStorage.setItem('users', JSON.stringify(this.state.users));
-    }
-  }
-
-
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -86,9 +39,8 @@ class NormalLoginForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <LogInPage className='log-in-page'>
-        <Title className='log-in-title'>Welcome to Instakilo</Title>
-        <SubTitle>...For when a gram just isn't enough</SubTitle>
+      <div className='log-in-page'>
+        <h1 className='log-in-title'>Welcome to Instakilo</h1>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
             {getFieldDecorator('username', {
@@ -117,12 +69,12 @@ class NormalLoginForm extends React.Component {
             </Button>
           </Form.Item>
         </Form>
-      </LogInPage>
+      </div>
       
     );
   }
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+const WrappedNormalSignUpForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
 
-export default WrappedNormalLoginForm;
+export default WrappedNormalSignUpForm;

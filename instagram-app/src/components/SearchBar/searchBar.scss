@@ -1,34 +1,19 @@
-.searchBar {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 70px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    border-radius: 5px;
-    align-items: baseline;
-
-}
 
 .logo{
     height: 50px;
+   color: #317480;
 }
 
 .text-logo{
     width: 150px;
+    color:#317480;
 }
 
-.search{
-    height: 40px;
-    width: 30%;
-    margin: 0 10%;
-    align-self: center;
-}
 
 
 
 .icon{
     font-size: 32px;
     margin: 0 10px;
+    color: #317480;
 }

@@ -109,17 +109,17 @@ class PostsPage extends React.Component {
      render() {
        return (
         <div className="App">
-        <SearchBar logOut={this.logOut} searchTerm={this.state.search} inputChange={this.searchInput}/>
-        <PostContainer 
-        posts={this.state.data.filter(post => {
-          return post.username.toLowerCase().includes(this.state.search.toLowerCase())
-        })} 
-        searchTerm={this.state.search} 
-        newComment={this.state.newComment}
-        error={this.state.error}
-        addComment={this.addComment}
-        commentInput={this.commentInput}
-        />
+          <SearchBar logOut={this.logOut} searchTerm={this.state.search} inputChange={this.searchInput}/>
+          <PostContainer 
+          posts={this.state.data.filter(post => {
+            return post.username.toLowerCase().includes(this.state.search.toLowerCase())
+          })} 
+          searchTerm={this.state.search} 
+          newComment={this.state.newComment}
+          error={this.state.error}
+          addComment={this.addComment}
+          commentInput={this.commentInput}
+          />
         
       </div>
        )

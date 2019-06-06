@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Post.scss';
+import styled from 'styled-components';
+
+const Comments = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin: -8px 0px -16px 10px;
+    p{
+        margin-left: 10px;
+        font-size: 14px;
+    }
+`;
 
 
 const PostComment = props => {
         return(
             <div >
             {props.comments.map(comment => (
-                <div className='comments'>
+                <Comments>
                     <h6>{comment.username}</h6>
                     <p>{comment.text}</p> 
-                </div>
+                </Comments>
                 ))}
             </div> 
         )
