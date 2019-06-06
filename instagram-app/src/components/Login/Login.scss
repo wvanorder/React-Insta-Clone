@@ -6,3 +6,9 @@ form.ant-form.ant-form-horizontal.login-form{
     padding-bottom: 40px;
     margin-bottom: 300px;
     }
+
+.ant-form-item-children{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+}
